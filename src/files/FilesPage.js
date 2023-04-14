@@ -5,30 +5,27 @@ import { connect } from 'redux-bundler-react'
 import { withTranslation, Trans } from 'react-i18next'
 import ReactJoyride from 'react-joyride'
 // Lib
-import { filesTour } from '../lib/tours'
-import downloadFile from './download-file'
+import { filesTour } from '../lib/tours.js'
 // Components
-import ContextMenu from './context-menu/ContextMenu'
-import withTour from '../components/tour/withTour'
-import InfoBoxes from './info-boxes/InfoBoxes'
-import FilePreview from './file-preview/FilePreview'
-import FilesList from './files-list/FilesList'
-import { getJoyrideLocales } from '../helpers/i8n'
+import ContextMenu from './context-menu/ContextMenu.js'
+import withTour from '../components/tour/withTour.js'
+import InfoBoxes from './info-boxes/InfoBoxes.js'
+import FilePreview from './file-preview/FilePreview.js'
+import FilesList from './files-list/FilesList.js'
+import { getJoyrideLocales } from '../helpers/i8n.js'
 
 // Icons
-import Modals, { DELETE, NEW_FOLDER, SHARE, RENAME, ADD_BY_PATH, CLI_TUTOR_MODE, PINNING } from './modals/Modals'
-import Header from './header/Header'
-import FileImportStatus from './file-import-status/FileImportStatus'
+import Modals, { DELETE, NEW_FOLDER, SHARE, RENAME, ADD_BY_PATH, CLI_TUTOR_MODE, PINNING, PUBLISH } from './modals/Modals.js'
+import Header from './header/Header.js'
+import FileImportStatus from './file-import-status/FileImportStatus.js'
 
 const FilesPage = ({
-  doFetchPinningServices, doFilesFetch, doPinsFetch, doFilesSizeGet, doFilesDownloadLink, doFilesWrite, doFilesAddPath, doUpdateHash,
-  doFilesUpdateSorting, doFilesNavigateTo, doFilesMove, doSetCliOptions, doFetchRemotePins, remotePins, doExploreUserProvidedPath,
-  ipfsProvider, ipfsConnected, doFilesMakeDir, doFilesShareLink, doFilesDelete, doSetPinning, onRemotePinClick,
+  doFetchPinningServices, doFilesFetch, doPinsFetch, doFilesSizeGet, doFilesDownloadLink, doFilesDownloadCarLink, doFilesWrite, doFilesAddPath, doUpdateHash,
+  doFilesUpdateSorting, doFilesNavigateTo, doFilesMove, doSetCliOptions, doFetchRemotePins, remotePins, pendingPins, failedPins, doExploreUserProvidedPath,
+  ipfsProvider, ipfsConnected, doFilesMakeDir, doFilesShareLink, doFilesDelete, doSetPinning, onRemotePinClick, doPublishIpnsKey,
   files, filesPathInfo, pinningServices, toursEnabled, handleJoyrideCallback, isCliTutorModeEnabled, cliOptions, t
 }) => {
   const contextMenuRef = useRef()
-  const [downloadAbort, setDownloadAbort] = useState(null)
-  const [downloadProgress, setDownloadProgress] = useState(null)
   const [modals, setModals] = useState({ show: null, files: null })
   const [contextMenu, setContextMenu] = useState({
     isOpen: false,
@@ -58,15 +55,15 @@ const FilesPage = ({
   */
 
   const onDownload = async (files) => {
-    if (downloadProgress !== null) {
-      return downloadAbort()
-    }
-
-    const updater = (v) => setDownloadProgress(v)
-    const { url, filename, method } = await doFilesDownloadLink(files)
-    const { abort } = await downloadFile(url, filename, updater, method)
-    setDownloadAbort(() => abort)
+    const url = await doFilesDownloadLink(files)
+    window.location.href = url
   }
+
+  const onDownloadCar = async (files) => {
+    const url = await doFilesDownloadCarLink(files)
+    window.location.href = url
+  }
+
   const onAddFiles = (raw, root = '') => {
     if (root === '') root = files.path
 
@@ -75,7 +72,7 @@ const FilesPage = ({
 
   const onAddByPath = (path, name) => doFilesAddPath(files.path, path, name)
   const onInspect = (cid) => doUpdateHash(`/explore/ipfs/${cid}`)
-  const showModal = (modal, files = null) => setModals({ show: modal, files: files })
+  const showModal = (modal, files = null) => setModals({ show: modal, files })
   const hideModal = () => setModals({})
   const handleContextMenu = (ev, clickType, file, pos) => {
     // This is needed to disable the native OS right-click menu
@@ -118,13 +115,11 @@ const FilesPage = ({
     })
   }
 
-  const MainView = ({ t, files, remotePins, doExploreUserProvidedPath }) => {
+  const MainView = ({ t, files, remotePins, pendingPins, failedPins, doExploreUserProvidedPath }) => {
     if (!files) return (<div/>)
 
     if (files.type === 'unknown') {
-      const path = files.path.startsWith('/pins')
-        ? files.path.slice(6)
-        : files.path
+      const path = files.path
 
       return (
         <div>
@@ -147,8 +142,9 @@ const FilesPage = ({
         updateSorting={doFilesUpdateSorting}
         files={files.content}
         remotePins={remotePins}
+        pendingPins={pendingPins}
+        failedPins={failedPins}
         upperDir={files.upper}
-        downloadProgress={downloadProgress}
         onShare={(files) => showModal(SHARE, files)}
         onRename={(files) => showModal(RENAME, files)}
         onRemove={(files) => showModal(DELETE, files)}
@@ -172,8 +168,6 @@ const FilesPage = ({
 
     if (filesPathInfo.isMfs) {
       parts.push(t('app:terms.files'))
-    } else if (filesPathInfo.isPins) {
-      parts.push(t('app:terms.pins'))
     }
 
     parts.push('IPFS')
@@ -202,7 +196,9 @@ const FilesPage = ({
         onRename={() => showModal(RENAME, [contextMenu.file])}
         onInspect={() => onInspect(contextMenu.file.cid)}
         onDownload={() => onDownload([contextMenu.file])}
+        onDownloadCar={() => onDownloadCar([contextMenu.file])}
         onPinning={() => showModal(PINNING, [contextMenu.file])}
+        onPublish={() => showModal(PUBLISH, [contextMenu.file])}
         isCliTutorModeEnabled={isCliTutorModeEnabled}
         onCliTutorMode={() => showModal(CLI_TUTOR_MODE, [contextMenu.file])}
         doSetCliOptions={doSetCliOptions}
@@ -218,7 +214,7 @@ const FilesPage = ({
         onCliTutorMode={() => showModal(CLI_TUTOR_MODE)}
         handleContextMenu={(...args) => handleContextMenu(...args, true)} />
 
-      <MainView t={t} files={files} remotePins={remotePins} doExploreUserProvidedPath={doExploreUserProvidedPath}/>
+      <MainView t={t} files={files} remotePins={remotePins} pendingPins={pendingPins} failedPins={failedPins} doExploreUserProvidedPath={doExploreUserProvidedPath}/>
 
       <InfoBoxes isRoot={filesPathInfo.isMfs && filesPathInfo.isRoot}
         isCompanion={ipfsProvider === 'window.ipfs'}
@@ -233,6 +229,7 @@ const FilesPage = ({
         onRemove={doFilesDelete}
         onAddByPath={onAddByPath}
         onPinningSet={doSetPinning}
+        onPublish={doPublishIpnsKey}
         cliOptions={cliOptions}
         { ...modals } />
 
@@ -256,6 +253,8 @@ export default connect(
   'selectIpfsConnected',
   'selectFiles',
   'selectRemotePins',
+  'selectPendingPins',
+  'selectFailedPins',
   'selectFilesPathInfo',
   'doUpdateHash',
   'doPinsFetch',
@@ -274,6 +273,7 @@ export default connect(
   'selectToursEnabled',
   'doFilesWrite',
   'doFilesDownloadLink',
+  'doFilesDownloadCarLink',
   'doExploreUserProvidedPath',
   'doFilesSizeGet',
   'selectIsCliTutorModeEnabled',
@@ -282,5 +282,6 @@ export default connect(
   'doSetCliOptions',
   'selectCliOptions',
   'doSetPinning',
+  'doPublishIpnsKey',
   withTour(withTranslation('files')(FilesPage))
 )

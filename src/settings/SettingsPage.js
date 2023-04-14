@@ -4,26 +4,27 @@ import { connect } from 'redux-bundler-react'
 import { withTranslation, Trans } from 'react-i18next'
 import ReactJoyride from 'react-joyride'
 // Tour
-import { settingsTour } from '../lib/tours'
-import withTour from '../components/tour/withTour'
-import { getJoyrideLocales } from '../helpers/i8n'
+import { settingsTour } from '../lib/tours.js'
+import withTour from '../components/tour/withTour.js'
+import { getJoyrideLocales } from '../helpers/i8n.js'
 // Components
-import Tick from '../icons/GlyphSmallTick'
-import Box from '../components/box/Box'
-import Button from '../components/button/Button'
-import LanguageSelector from '../components/language-selector/LanguageSelector'
-import PinningManager from '../components/pinning-manager/PinningManager'
-import AnalyticsToggle from '../components/analytics-toggle/AnalyticsToggle'
-import ApiAddressForm from '../components/api-address-form/ApiAddressForm'
-import PublicGatewayForm from '../components/public-gateway-form/PublicGatewayForm'
-import JsonEditor from './editor/JsonEditor'
-import Experiments from '../components/experiments/ExperimentsPanel'
-import Title from './Title'
-import CliTutorMode from '../components/cli-tutor-mode/CliTutorMode'
-import Checkbox from '../components/checkbox/Checkbox'
+import Tick from '../icons/GlyphSmallTick.js'
+import Box from '../components/box/Box.js'
+import Button from '../components/button/Button.js'
+import LanguageSelector from '../components/language-selector/LanguageSelector.js'
+import PinningManager from '../components/pinning-manager/PinningManager.js'
+import IpnsManager from '../components/ipns-manager/IpnsManager.js'
+import AnalyticsToggle from '../components/analytics-toggle/AnalyticsToggle.js'
+import ApiAddressForm from '../components/api-address-form/ApiAddressForm.js'
+import PublicGatewayForm from '../components/public-gateway-form/PublicGatewayForm.js'
+import { JsonEditor } from './editor/JsonEditor.js'
+import Experiments from '../components/experiments/ExperimentsPanel.js'
+import Title from './Title.js'
+import CliTutorMode from '../components/cli-tutor-mode/CliTutorMode.js'
+import Checkbox from '../components/checkbox/Checkbox.js'
 import ComponentLoader from '../loader/ComponentLoader.js'
-import StrokeCode from '../icons/StrokeCode'
-import { cliCmdKeys, cliCommandList } from '../bundles/files/consts'
+import StrokeCode from '../icons/StrokeCode.js'
+import { cliCmdKeys, cliCommandList } from '../bundles/files/consts.js'
 
 const PAUSE_AFTER_SAVE_MS = 3000
 
@@ -55,7 +56,7 @@ export const SettingsPage = ({
         <div className='lh-copy charcoal'>
           <Title>{t('app:terms.apiAddress')}</Title>
           <Trans i18nKey='apiDescription' t={t}>
-            <p>If your node is configured with a <a className='link blue' href='https://github.com/ipfs/go-ipfs/blob/master/docs/config.md#addresses' target='_blank' rel='noopener noreferrer'>custom API address</a>, including a port other than the default 5001, enter it here.</p>
+            <p>If your node is configured with a <a className='link blue' href='https://github.com/ipfs/kubo/blob/master/docs/config.md#addresses' target='_blank' rel='noopener noreferrer'>custom API address</a>, including a port other than the default 5001, enter it here.</p>
           </Trans>
           <ApiAddressForm/>
         </div>
@@ -69,6 +70,14 @@ export const SettingsPage = ({
         </Trans>
         <PublicGatewayForm/>
       </div>
+    </Box>
+
+    <Box className='mb3 pa4-l pa2'>
+      <Title>{t('ipnsPublishingKeys.title')}</Title>
+      <p className='ma0 mr2 lh-copy charcoal f6'>
+        {t('ipnsPublishingKeys.description')}&nbsp;<a className='link blue' target='_blank' rel='noopener noreferrer' href='https://docs.ipfs.io/concepts/glossary/#ipns'>{t('learnMoreLink')}</a>
+      </p>
+      <IpnsManager t={t} />
     </Box>
 
     <Box className='mb3 pa4-l pa2 joyride-settings-pinning'>
@@ -126,7 +135,8 @@ export const SettingsPage = ({
                 hasSaveSucceded={hasSaveSucceded} />
             </div>
           </div>
-          { config ? (
+          { config
+            ? (
             <div className='flex flex-column justify-center flex-row-l items-center-l'>
               <CliTutorMode showIcon={true} config={config} t={t} command={command}/>
               <Button
@@ -149,16 +159,19 @@ export const SettingsPage = ({
                 isSaving={isSaving}
                 onClick={onSave} />
             </div>
-          ) : null }
+              )
+            : null }
         </div>
       </div>
-      { config ? (
+      { config
+        ? (
         <JsonEditor
           value={config}
           onChange={onChange}
           readOnly={isSaving}
           key={editorKey} />
-      ) : null }
+          )
+        : null }
     </Box>
     )}
 
@@ -185,11 +198,13 @@ const SaveButton = ({ t, hasErrors, hasSaveFailed, hasSaveSucceded, isSaving, ha
       disabled={!hasLocalChanges || hasErrors}
       danger={hasSaveFailed || hasExternalChanges}
       onClick={onClick}>
-      { hasSaveSucceded && !hasSaveFailed ? (
+      { hasSaveSucceded && !hasSaveFailed
+        ? (
         <Tick height={16} className='fill-snow' style={{ transform: 'scale(3)' }} />
-      ) : (
-        isSaving ? t('app:actions.saving') : t('app:actions.save')
-      )}
+          )
+        : (
+            isSaving ? t('app:actions.saving') : t('app:actions.save')
+          )}
     </Button>
   )
 }
@@ -238,7 +253,7 @@ const SettingsInfo = ({ t, isIpfsConnected, isConfigBlocked, hasExternalChanges,
   }
   return (
     <p className='ma0 mr2 lh-copy charcoal f5'>
-      {t('ipfsConfigDescription')} <a href='https://github.com/ipfs/go-ipfs/blob/master/docs/config.md' rel='noopener noreferrer' target='_blank' className='link blue'>{t('ipfsConfigHelp')}</a>
+      {t('ipfsConfigDescription')} <a href='https://github.com/ipfs/kubo/blob/master/docs/config.md' rel='noopener noreferrer' target='_blank' className='link blue'>{t('ipfsConfigHelp')}</a>
     </p>
   )
 }

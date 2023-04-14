@@ -1,13 +1,15 @@
 import { createAsyncResourceBundle, createSelector } from 'redux-bundler'
 import { getConfiguredCache } from 'money-clip'
-import geoip from 'ipfs-geoip'
+import { lookup } from 'ipfs-geoip'
 import PQueue from 'p-queue'
 import HLRU from 'hashlru'
 import Multiaddr from 'multiaddr'
 import ms from 'milliseconds'
 import ip from 'ip'
 import memoize from 'p-memoize'
-import { dependencies } from '../../package.json'
+import pkgJson from '../../package.json'
+
+const { dependencies } = pkgJson
 
 // After this time interval, we re-check the locations for each peer
 // once again through PeerLocationResolver.
@@ -30,10 +32,8 @@ function createPeersLocations (opts) {
   const bundle = createAsyncResourceBundle({
     name: 'peerLocations',
     actionBaseType: 'PEER_LOCATIONS',
-    getPromise: async ({ store, getIpfs }) => {
-      const peers = store.selectPeers()
-      return peerLocResolver.findLocations(peers, getIpfs)
-    },
+    getPromise: ({ store }) => peerLocResolver.findLocations(
+      store.selectAvailableGatewayUrl(), store.selectPeers()),
     staleAfter: UPDATE_EVERY,
     retryAfter: UPDATE_EVERY,
     persist: false,
@@ -168,7 +168,12 @@ const getPublicIP = memoize((identity) => {
       if ((ip.isV4Format(addr.address) || ip.isV6Format(addr.address)) && !ip.isPrivate(addr.address)) {
         return addr.address
       }
-    } catch (_) {}
+    } catch (e) {
+      // TODO: We should provide a way to log these errors when debugging
+      // if (['development', 'test'].includes(process.env.REACT_APP_ENV)) {
+      //   console.error(e)
+      // }
+    }
   }
 })
 
@@ -225,7 +230,7 @@ class PeerLocationResolver {
     this.pass = 0
   }
 
-  async findLocations (peers, getIpfs) {
+  async findLocations (gatewayUrls, peers) {
     const res = {}
 
     for (const p of this.optimizedPeerSet(peers)) {
@@ -255,7 +260,7 @@ class PeerLocationResolver {
 
       this.geoipLookupPromises.set(ipv4Addr, this.queue.add(async () => {
         try {
-          const data = await geoip.lookup(getIpfs(), ipv4Addr)
+          const data = await lookup(gatewayUrls, ipv4Addr)
           await this.geoipCache.set(ipv4Addr, data)
         } catch (e) {
           // mark this one as failed so we don't retry again

@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { connect } from 'redux-bundler-react'
 import { withTranslation, Trans } from 'react-i18next'
 import classNames from 'classnames'
-import ApiAddressForm from '../api-address-form/ApiAddressForm'
-import Box from '../box/Box'
+import ApiAddressForm from '../api-address-form/ApiAddressForm.js'
+import Box from '../box/Box.js'
 import Shell from '../shell/Shell.js'
-import GlyphAttention from '../../icons/GlyphAttention'
+import GlyphAttention from '../../icons/GlyphAttention.js'
 
 const TABS = {
   UNIX: 'unix',
@@ -77,7 +77,7 @@ const IsNotConnected = ({ t, apiUrl, connected, sameOrigin, ipfsApiAddress, doUp
           </div>
         )}
         <Trans i18nKey='notConnected.paragraph4' t={t}>
-          <li className='mt4 mb3'>Is your IPFS API on a port other than 5001? If your node is configured with a <a className='link blue' href='https://github.com/ipfs/go-ipfs/blob/master/docs/config.md#addresses' target='_blank' rel='noopener noreferrer'>custom API address</a>, enter it here.</li>
+          <li className='mt4 mb3'>Is your IPFS API on a port other than 5001? If your node is configured with a <a className='link blue' href='https://github.com/ipfs/kubo/blob/master/docs/config.md#addresses' target='_blank' rel='noopener noreferrer'>custom API address</a>, enter it here.</li>
         </Trans>
         <ApiAddressForm
           t={t}

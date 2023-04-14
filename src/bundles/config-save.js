@@ -1,7 +1,7 @@
 // @ts-check
 
-import * as Enum from './enum'
-import { perform } from './task'
+import * as Enum from './enum.js'
+import { perform } from './task.js'
 
 /**
  * @typedef {import('./task').Perform<'CONFIG_SAVE', Error, void, void>} ConfigSave
@@ -91,7 +91,8 @@ const attempt = async (fn) => {
   try {
     const value = await fn()
     return { ok: true, value }
-  } catch (error) {
+  } catch (err) {
+    const error = /** @type {Error} */(err)
     return { ok: false, error }
   }
 }

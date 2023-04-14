@@ -6,11 +6,11 @@ import { withTranslation, Trans } from 'react-i18next'
 import { useForm } from 'react-hook-form'
 
 // Components
-import { Modal, ModalBody, ModalActions } from '../../modal/Modal'
-import Button from '../../button/Button'
+import { Modal, ModalBody, ModalActions } from '../../modal/Modal.js'
+import Button from '../../button/Button.js'
 import './PinningManagerServiceModal.css'
 
-const PinningManagerServiceModal = ({ t, onLeave, onSuccess, className, service, tReady, doAddPinningService, nickname, apiEndpoint, visitServiceUrl, secretApiKey, ...props }) => {
+const PinningManagerServiceModal = ({ t, onLeave, onSuccess, className, service, tReady, doAddPinningService, nickname, apiEndpoint, visitServiceUrl, secretApiKey, complianceReportUrl, ...props }) => {
   const { register, errors, clearErrors, setError, handleSubmit } = useForm({
     defaultValues: {
       nickname,
@@ -40,6 +40,7 @@ const PinningManagerServiceModal = ({ t, onLeave, onSuccess, className, service,
       <form onSubmit={handleSubmit(onSubmit)} onChange={cleanErrors}>
         <ModalBody>
           <p>{ t('pinningServiceModal.title') }</p>
+          {complianceReportUrl && (<a className="mb1 tl f7 charcoal-muted no-underline underline-hover" target="_blank" rel="noreferrer" href={complianceReportUrl}>{t('pinningServiceModal.complianceLabel', { nickname })}</a>) }
 
           <div className='pa2 pinningManagerServiceModalContainer'>
             { service.icon && service.name && (

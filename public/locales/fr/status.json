@@ -6,15 +6,15 @@
   "bandwidthOverTime": "Bande passante en fonction du temps",
   "bandwidthByPeer": "Bande passante par pair",
   "distributionOfPeers": "Répartition des pairs",
-  "pieChartLabel": "{count, plural, one {{percent}% ({count} Pair)} other {{percent}% ({count} Pairs)}}",
+  "pieChartLabel": "{count, plural, one {{percent}% ({count} Pair)} many {{percent}% ({count} Pairs)} other {{percent}% ({count} Pairs)}}",
   "countMore": "...et {count} de plus",
   "StatusConnected": {
     "repoSize": "{repoSize} de données hébergées",
-    "peersCount": "{peersCount, plural, one {1 pair découvert} other {{peersCount} pairs découverts}}"
+    "peersCount": "{peersCount, plural, one {1 pair découvert} many {{peersCount} pairs découverts} other {{peersCount} pairs découverts}}"
   },
   "customApiConfig": "JSON de configuration personnalisée",
-  "AskToEnable": {
-    "label": "Aidez à améliorer cette application en envoyant des données d'utilisation anonymes."
+  "AnalyticsBanner": {
+    "label": "Nous avons récemment mis à jour notre politique de télémétrie qui est désormais activée par défaut. Votre télémétrie était précédemment désactivée. Vous pouvez la désactiver (à nouveau) dans la page Paramètres."
   },
   "tour": {
     "step1": {

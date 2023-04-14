@@ -7,7 +7,7 @@ import { withTranslation } from 'react-i18next'
 import { useDrop } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
 
-import { normalizeFiles } from '../../lib/files'
+import { normalizeFiles } from '../../lib/files.js'
 
 import './Breadcrumbs.css'
 
@@ -123,7 +123,7 @@ function makeBread (root, t, isImmutable, setImmutable) {
     const name = parts[i].name
 
     parts[i] = {
-      name: name,
+      name,
       path: parts[i - 1].path + '/' + parts[i].path
     }
 

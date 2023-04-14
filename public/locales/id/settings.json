@@ -4,10 +4,11 @@
   "saving": "Menyimpan...",
   "reset": "Mengatur ulang",
   "learnMoreLink": "Belajarlah lagi.",
+  "showOptions": "Tampilkan opsi",
   "pinningServices": {
     "title": "Layanan Penyematan",
     "description": "Gunakan penyematan lokal saat Anda ingin memastikan item di node Anda tidak pernah menjadi sampah, bahkan jika Anda menghapusnya dari Berkas. Anda juga dapat menautkan akun Anda dengan layanan penyematan jarak jauh lainnya untuk secara otomatis atau selektif menyimpan berkas dengan penyedia tersebut, memungkinkan Anda untuk menyimpan salinan cadangan berkas Anda dan/atau membuatnya tersedia untuk orang lain saat node lokal Anda offline.",
-    "noPinRemoteDescription": "Dukungan untuk layanan penyematan jarak jauh pihak ketiga tidak ada. Perbarui node IPFS Anda ke go-ipfs 0.8.0 atau yang lebih baru, dan Anda dapat menambahkan dan mengonfigurasinya di sini.",
+    "noPinRemoteDescription": "Dukungan untuk layanan penyematan jarak jauh pihak ketiga tidak ada. Perbarui node IPFS Anda ke Kubo 0.8.0 atau yang lebih baru, dan Anda dapat menambahkan dan mengonfigurasinya di sini.",
     "addAutoUpload": "Aktifkan unggah otomatis",
     "removeAutoUpload": "Nonaktifkan Unggah Otomatis"
   },
@@ -41,7 +42,8 @@
     "apiEndpointPlaceholder": "URL untuk titik akhir API-nya",
     "secretApiKey": "Token akses rahasia",
     "secretApiKeyHowToLink": "Cara menghasilkan token baru",
-    "autoUpload": "Unggah otomatis"
+    "autoUpload": "Unggah otomatis",
+    "complianceLabel": "{nickname}menyematkan laporan kepatuhan"
   },
   "autoUploadModal": {
     "title": "Ubah kebijakan unggah untuk {name}",
@@ -57,6 +59,7 @@
   },
   "actions": {
     "addService": "Tambahkan Layanan",
+    "generateKey": "Hasilkan Kunci",
     "edit": "Mengubah",
     "close": "Tutup",
     "save": "Simpan",
@@ -161,5 +164,21 @@
     "issueUrl": "Buka sebuah isu",
     "feedbackUrl": "💌Tinggalkan umpan balik",
     "readMoreUrl": "Baca selengkapnya"
+  },
+  "ipnsPublishingKeys": {
+    "title": "Kunci Penerbitan IPNS",
+    "description": "Sistem Nama InterPlanetary (IPNS) menyediakan alamat kriptografik untuk menerbitkan pembaruan pada konten yang diperkirakan akan berubah seiring waktu. Fitur ini mengharuskan node Anda untuk online setidaknya sekali sehari untuk memastikan catatan IPNS tetap hidup di DHT publik."
+  },
+  "generateKeyModal": {
+    "title": "Hasilkan Kunci IPNS Baru",
+    "description": "Masukkan nama panggilan untuk kunci ini untuk menghasilkan:"
+  },
+  "renameKeyModal": {
+    "title": "Ganti Nama Kunci",
+    "description": "Masukkan nama panggilan baru untuk kunci IPNS<1>{name}</1>."
+  },
+  "removeKeyModal": {
+    "title": "Konfirmasi Penghapusan Kunci IPNS",
+    "description": "Apakah Anda yakin ingin menghapus kunci IPNS? <1>{name}</1>? Operasi ini tidak dapat dibatalkan, dan alamat IPNS yang dikelola oleh kunci ini akan hilang SELAMANYA. Pertimbangkan untuk mencadangkannya terlebih dahulu: ipfs key export --help"
   }
 }

@@ -2,15 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { Dropdown, DropdownMenu, Option } from '../dropdown/Dropdown'
-import StrokeCopy from '../../icons/StrokeCopy'
-import StrokeShare from '../../icons/StrokeShare'
-import StrokePencil from '../../icons/StrokePencil'
-import StrokeIpld from '../../icons/StrokeIpld'
-import StrokeTrash from '../../icons/StrokeTrash'
-import StrokeDownload from '../../icons/StrokeDownload'
-import StrokePin from '../../icons/StrokePin'
-import { cliCmdKeys } from '../../bundles/files/consts'
+import { Dropdown, DropdownMenu, Option } from '../dropdown/Dropdown.js'
+import StrokeCopy from '../../icons/StrokeCopy.js'
+import StrokeShare from '../../icons/StrokeShare.js'
+import StrokeSpeaker from '../../icons/StrokeSpeaker.js'
+import StrokePencil from '../../icons/StrokePencil.js'
+import StrokeIpld from '../../icons/StrokeIpld.js'
+import StrokeTrash from '../../icons/StrokeTrash.js'
+import StrokeDownload from '../../icons/StrokeDownload.js'
+import StrokeData from '../../icons/StrokeData.js'
+import StrokePin from '../../icons/StrokePin.js'
+import { cliCmdKeys } from '../../bundles/files/consts.js'
 
 class ContextMenu extends React.Component {
   constructor (props) {
@@ -43,7 +45,7 @@ class ContextMenu extends React.Component {
 
   render () {
     const {
-      t, onRename, onRemove, onDownload, onInspect, onShare,
+      t, onRename, onRemove, onDownload, onInspect, onShare, onDownloadCar, onPublish,
       translateX, translateY, className, isMfs, isUnknown, isCliTutorModeEnabled
     } = this.props
     return (
@@ -87,6 +89,13 @@ class ContextMenu extends React.Component {
               {t('app:actions.download')}
             </Option>
           }
+          { !isUnknown && onDownloadCar &&
+            <Option onClick={this.wrap('onDownloadCar')} isCliTutorModeEnabled={isCliTutorModeEnabled}
+              onCliTutorMode={this.wrap('onCliTutorMode', cliCmdKeys.DOWNLOAD_CAR_COMMAND)}>
+              <StrokeData className='w2 mr2 fill-aqua' />
+              {t('app:actions.downloadCar')}
+            </Option>
+          }
           { !isUnknown && isMfs && onRename &&
             <Option onClick={this.wrap('onRename')} isCliTutorModeEnabled={isCliTutorModeEnabled}
               onCliTutorMode={this.wrap('onCliTutorMode', cliCmdKeys.RENAME_IPFS_OBJECT)}>
@@ -99,6 +108,13 @@ class ContextMenu extends React.Component {
               onCliTutorMode={this.wrap('onCliTutorMode', cliCmdKeys.REMOVE_FILE_FROM_IPFS)}>
               <StrokeTrash className='w2 mr2 fill-aqua' />
               {t('app:actions.remove')}
+            </Option>
+          }
+          { onPublish &&
+            <Option onClick={this.wrap('onPublish')} isCliTutorModeEnabled={isCliTutorModeEnabled}
+              onCliTutorMode={this.wrap('onCliTutorMode', cliCmdKeys.PUBLISH_WITH_IPNS)}>
+              <StrokeSpeaker className='w2 mr2 fill-aqua' />
+              {t('actions.publishWithIpns')}
             </Option>
           }
         </DropdownMenu>
@@ -120,8 +136,10 @@ ContextMenu.propTypes = {
   onRemove: PropTypes.func,
   onRename: PropTypes.func,
   onDownload: PropTypes.func,
+  onDownloadCar: PropTypes.func,
   onInspect: PropTypes.func,
   onShare: PropTypes.func,
+  onPublish: PropTypes.func,
   className: PropTypes.string,
   t: PropTypes.func.isRequired,
   tReady: PropTypes.bool.isRequired,

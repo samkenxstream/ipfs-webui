@@ -2,13 +2,15 @@ import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'redux-bundler-react'
 import { withTranslation } from 'react-i18next'
-import { humanSize } from '../../lib/files'
+import { humanSize } from '../../lib/files.js'
 // Components
-import Breadcrumbs from '../breadcrumbs/Breadcrumbs'
-import FileInput from '../file-input/FileInput'
-import Button from '../../components/button/Button'
+import Breadcrumbs from '../breadcrumbs/Breadcrumbs.js'
+import FileInput from '../file-input/FileInput.js'
+import Button from '../../components/button/Button.js'
 // Icons
-import GlyphDots from '../../icons/GlyphDots'
+import GlyphDots from '../../icons/GlyphDots.js'
+import GlyphPinCloud from '../../icons/GlyphPinCloud.js'
+import '../PendingAnimation.css'
 
 const BarOption = ({ children, text, isLink = false, className = '', ...etc }) => (
   <div className={classNames(className, 'tc pa3', etc.onClick && 'pointer')} {...etc}>
@@ -47,8 +49,13 @@ class Header extends React.Component {
       filesSize,
       onNavigate,
       repoSize,
+      pendingPins,
+      failedPins,
+      completedPins,
       t
     } = this.props
+
+    const pinsInQueue = pendingPins.length + failedPins.length + completedPins.length
 
     return (
       <div className='db flex-l justify-between items-center'>
@@ -59,13 +66,19 @@ class Header extends React.Component {
         </div>
 
         <div className='mb3 flex justify-between items-center bg-snow-muted joyride-files-add'>
+          { pinsInQueue > 0 && <a href='#/pins' alt={t('pinningQueue')} title={t('pinningQueue')} className='ml3'>
+            <GlyphPinCloud
+              style={{ width: '3rem' }}
+              className='fill-teal PendingAnimation' />
+          </a> }
+
           <BarOption title={t('filesDescription')} text={t('app:terms:files')}>
             { hasUpperDirectory
               ? (
                 <span>
                   { size(currentDirectorySize) }<span className='f5 gray'>/{ size(filesSize) }</span>
                 </span>
-              )
+                )
               : size(filesSize) }
           </BarOption>
 
@@ -111,5 +124,8 @@ export default connect(
   'selectRepoNumObjects',
   'selectFilesPathInfo',
   'selectCurrentDirectorySize',
+  'selectPendingPins',
+  'selectFailedPins',
+  'selectCompletedPins',
   withTranslation('files')(Header)
 )

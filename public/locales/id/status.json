@@ -13,8 +13,8 @@
     "peersCount": "{peersCount, plural, other {Menemukan {peersCount} rekan}}"
   },
   "customApiConfig": "Konfigurasi JSON kustom",
-  "AskToEnable": {
-    "label": "Bantu tingkatkan aplikasi ini dengan mengirimkan data penggunaan anonim."
+  "AnalyticsBanner": {
+    "label": "Kami baru saja memperbarui kebijakan telemetri untuk beralih ke metrik penyisihan. Anda sebelumnya telah menonaktifkan pengumpulan telemetri. Anda dapat menonaktifkan pengumpulan telemetri (lagi) di halaman pengaturan."
   },
   "tour": {
     "step1": {

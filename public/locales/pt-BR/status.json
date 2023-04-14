@@ -6,15 +6,15 @@
   "bandwidthOverTime": "Largura de banda utilizada",
   "bandwidthByPeer": "Largura de banda por par",
   "distributionOfPeers": "Distribuição dos pares",
-  "pieChartLabel": "{count, plural, one {{percent}% ({count} Par)} other {{percent}% ({count}Pares)}}",
+  "pieChartLabel": "{count, plural, one {{percent}% ({count} Par)} many {{percent}% ({count}Pares)} other {{percent}% ({count}Pares)}}",
   "countMore": "...e mais{count} pares",
   "StatusConnected": {
     "repoSize": "Hospedando {repoSize} de dados",
-    "peersCount": "{peersCount, plural, one {Descoberto um par} other {Descobertos {peersCount} pares}}"
+    "peersCount": "{peersCount, plural, one {Descoberto um par} many {Descobertos {peersCount} pares} other {Descobertos {peersCount} pares}}"
   },
   "customApiConfig": "Configuração JSON personalizada",
-  "AskToEnable": {
-    "label": "Ajude a melhorar este aplicativos enviado dados de utilização anônimos."
+  "AnalyticsBanner": {
+    "label": "Atualizamos recentemente nossa política de telemetria para mudar para métricas de opt-out. Anteriormente você tinha a coleta de telemetria desativada. Você pode desabilitar a coleta de telemetria (novamente) na página de configurações."
   },
   "tour": {
     "step1": {

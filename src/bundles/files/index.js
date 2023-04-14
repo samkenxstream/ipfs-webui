@@ -1,7 +1,7 @@
-import { sortFiles } from './utils'
-import { DEFAULT_STATE, ACTIONS, SORTING } from './consts'
-import selectors from './selectors'
-import actions from './actions'
+import { sortFiles } from './utils.js'
+import { DEFAULT_STATE, ACTIONS, SORTING } from './consts.js'
+import selectors from './selectors.js'
+import actions from './actions.js'
 
 export { ACTIONS }
 
@@ -53,19 +53,15 @@ const createFilesBundle = () => {
           const result = task.status === 'Exit' && task.result.ok
             ? task.result.value
             : null
-          const { pageContent, pins } = result
+          const { pageContent } = result
             ? {
-              pageContent: result,
-              pins: result.type === 'directory' && result.path === '/pins'
-                ? result.content.map($ => $.cid.toString())
-                : state.pins
-            }
+                pageContent: result
+              }
             : state
 
           return {
             ...updateJob(state, task, type),
-            pageContent,
-            pins
+            pageContent
           }
         }
         case ACTIONS.DISMISS_ERRORS: {

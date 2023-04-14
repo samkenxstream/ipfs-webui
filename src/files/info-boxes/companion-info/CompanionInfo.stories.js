@@ -1,12 +1,15 @@
-import React from 'react'
-import { storiesOf } from '@storybook/react'
-import i18n from '../../../i18n-decorator'
-import CompanionInfo from './CompanionInfo'
+// @ts-check
+import CompanionInfo from './CompanionInfo.js'
 
-storiesOf('Files/Info Boxes', module)
-  .addDecorator(i18n)
-  .add('Companion Info', () => (
-    <div className='ma3 sans-serif'>
-      <CompanionInfo />
-    </div>
-  ))
+/**
+ * @type {import('@storybook/react').Meta}
+ */
+export default {
+  title: 'Files/Info Boxes/CompanionInfo',
+  component: CompanionInfo
+}
+
+/**
+ * @type {import('@storybook/react').StoryObj}
+ */
+export const Default = {}

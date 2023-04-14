@@ -27,15 +27,18 @@
     "setPinning": "Setel penyematan",
     "submit": "Kirimkan",
     "unpin": "Lepaskan semat",
-    "unselectAll": "Batalkan pilihan semua"
+    "unselectAll": "Batalkan pilihan semua",
+    "generate": "Hasilkan",
+    "publish": "Menerbitkan",
+    "downloadCar": "Unduh sebagai CAR",
+    "done": "Selesai"
   },
   "cliModal": {
     "description": "Rekatkan yang berikut ini ke terminal Anda untuk melakukan tugas ini di IPFS melalui baris perintah. Ingatlah bahwa Anda harus mengganti tempat penampung dengan parameter spesifik Anda."
   },
   "nav": {
     "bugsLink": "Laporkan bug",
-    "codeLink": "Lihat kodenya",
-    "revision": "Revisi"
+    "codeLink": "Lihat kodenya"
   },
   "status": {
     "connectedToIpfs": "Terhubung ke IPFS",
@@ -73,6 +76,7 @@
     "out": "Keluar",
     "peer": "Rekan",
     "peerId": "ID rekan",
+    "id": "ID",
     "peers": "Rekan",
     "pinNoun": "Semat",
     "pins": "Semat",
@@ -87,7 +91,8 @@
     "totalOut": "Total keluar",
     "unknown": "Tidak dikenal",
     "ui": "UI",
-    "upSpeed": "Keluar"
+    "upSpeed": "Keluar",
+    "revision": "Revisi"
   },
   "tour": {
     "back": "Kembali",

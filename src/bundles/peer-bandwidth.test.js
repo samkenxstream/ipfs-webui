@@ -1,10 +1,10 @@
 /* global it, expect */
 import { composeBundlesRaw, createReactorBundle } from 'redux-bundler'
-import createPeerBandwidthBundle from './peer-bandwidth'
-import { fakeCid } from '../../test/helpers/cid'
-import { randomInt } from '../../test/helpers/random'
-import sleep from '../../test/helpers/sleep'
-import { fakeBandwidth } from '../../test/helpers/bandwidth'
+import createPeerBandwidthBundle from './peer-bandwidth.js'
+import { fakeCid } from '../../test/helpers/cid.js'
+import { randomInt } from '../../test/helpers/random.js'
+import sleep from '../../test/helpers/sleep.js'
+import { fakeBandwidth } from '../../test/helpers/bandwidth.js'
 
 async function fakePeer () {
   const peer = (await fakeCid()).toBaseEncodedString('base58btc')
@@ -194,10 +194,12 @@ it('should get bandwidth for added peers', async () => {
   bwPeers.forEach(({ bw }) => expect(bw).toBeFalsy())
 
   // Wait for all the bandwdith stats to come in
-  await sleep(30)
+  while (bwPeers.some(p => typeof p.bw === 'undefined')) {
+    await sleep(30)
+    bwPeers = store.selectPeerBandwidthPeers()
+  }
 
   // Now all the peers should have had their bandwidth updated
-  bwPeers = store.selectPeerBandwidthPeers()
   expect(bwPeers.length).toBe(peers.length)
 
   bwPeers.forEach(({ bw }) => expect(bw).toBeTruthy())

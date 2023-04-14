@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
-import i18n, { localesList } from '../../../i18n'
+import i18n, { localesList } from '../../../i18n.js'
 
 // Components
-import { Modal, ModalBody, ModalActions } from '../../modal/Modal'
-import SpeakerIcon from '../../../icons/StrokeSpeaker'
-import Button from '../../button/Button'
+import { Modal, ModalBody, ModalActions } from '../../modal/Modal.js'
+import SpeakerIcon from '../../../icons/StrokeSpeaker.js'
+import Button from '../../button/Button.js'
 
 const LanguageModal = ({ t, tReady, onLeave, link, className, isIpfsDesktop, doDesktopUpdateLanguage, ...props }) => {
   const handleClick = (lang) => {
@@ -25,7 +25,7 @@ const LanguageModal = ({ t, tReady, onLeave, link, className, isIpfsDesktop, doD
           { localesList.map((lang) =>
             <button
               key={`lang-${lang.locale}`}
-              className='pa2 w-33 flex nowrap bg-transparent bn outline-0 blue justify-center'
+              className={`pa2 w-33 flex nowrap bg-transparent bn outline-0 blue justify-center e2e-languageModal-lang e2e-languageModal-lang_${lang.locale}`}
               onClick={() => handleClick(lang.locale)}>
               { lang.nativeName }
             </button>

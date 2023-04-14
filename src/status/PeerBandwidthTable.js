@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'redux-bundler-react'
 import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
-import { humanSize } from '../lib/files'
+import { humanSize } from '../lib/files.js'
 import CountryFlag from 'react-country-flag'
-import Box from '../components/box/Box'
-import { Title } from './Commons'
+import Box from '../components/box/Box.js'
+import { Title } from './Commons.js'
 import ComponentLoader from '../loader/ComponentLoader.js'
 
 const isWindows = window.navigator.appVersion.indexOf('Win') !== -1
@@ -52,9 +52,11 @@ export class PeerBandwidthTable extends Component {
     const visiblePeers = showAll ? sortedPeers : sortedPeers.slice(0, 5)
     const hiddenPeers = showAll ? [] : sortedPeers.slice(5)
 
-    return sortedPeers.length === 0 ? (
+    return sortedPeers.length === 0
+      ? (
       <ComponentLoader />
-    ) : (
+        )
+      : (
       <Box className={className}>
         <Title>{t('bandwidthByPeer')}</Title>
         <table className='collapse'>
@@ -78,11 +80,13 @@ export class PeerBandwidthTable extends Component {
             ))}
           </tbody>
         </table>
-        {!showAll && hiddenPeers.length ? (
+        {!showAll && hiddenPeers.length
+          ? (
           <button className='sans-serif f5 ma0 buttonv3 ph2 tc pointer underline-hover navy-muted' onClick={this.onShowAllClick}>{t('countMore', { count: hiddenPeers.length })}</button>
-        ) : null}
+            )
+          : null}
       </Box>
-    )
+        )
   }
 }
 

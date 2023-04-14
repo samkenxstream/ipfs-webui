@@ -21,12 +21,17 @@
   "IpldExploreForm": {
     "explore": "Jelajah"
   },
+  "IpldCarExploreForm": {
+    "imports": "Impor",
+    "uploadCarFile": "Unggah Berkas CAR"
+  },
   "CidInfo": {
     "header": "Info CID",
     "hashDigest": "Intisari Hash"
   },
   "ObjectInfo": {
-    "gatewayLink": "Lihat di Gerbang IPFS"
+    "publicGateway": "Lihat di Gerbang Umum",
+    "privateGateway": "Lihat di Gerbang Lokal"
   },
   "base": "basis",
   "version": "versi",

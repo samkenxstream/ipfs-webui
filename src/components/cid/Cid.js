@@ -1,8 +1,9 @@
 import React from 'react'
-import Identicon from '../identicon/Identicon'
+import { Identicon } from '../identicon/Identicon.js'
+import ErrorBoundary from '../error/ErrorBoundary.js'
 
 export function cidStartAndEnd (value) {
-  const chars = value.split('')
+  const chars = value.toString().split('')
   if (chars.length <= 9) return value
   const start = chars.slice(0, 4).join('')
   const end = chars.slice(chars.length - 4).join('')
@@ -26,7 +27,7 @@ const Cid = React.forwardRef(({ value, title, style, identicon = false, ...props
   const { start, end } = cidStartAndEnd(value)
   return (
     <abbr title={title || value} style={style} ref={ref} {...props}>
-      { identicon && <Identicon cid={value} className='mr2' /> }
+      { identicon && <ErrorBoundary fallback={() => null}><Identicon cid={value} className='mr2' /></ErrorBoundary> }
       <span>
         <span>{start}</span>
         <span className='o-20'>…</span>

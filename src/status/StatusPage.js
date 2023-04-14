@@ -3,25 +3,26 @@ import { Helmet } from 'react-helmet'
 import { withTranslation, Trans } from 'react-i18next'
 import { connect } from 'redux-bundler-react'
 import ReactJoyride from 'react-joyride'
-import StatusConnected from './StatusConnected'
-import BandwidthStatsDisabled from './BandwidthStatsDisabled'
-import IsNotConnected from '../components/is-not-connected/IsNotConnected'
-import NodeInfo from './NodeInfo'
-import NodeInfoAdvanced from './NodeInfoAdvanced'
-import NodeBandwidthChart from './NodeBandwidthChart'
-import NetworkTraffic from './NetworkTraffic'
-import Box from '../components/box/Box'
-import AskToEnable from '../components/ask/AskToEnable'
-import { statusTour } from '../lib/tours'
-import { getJoyrideLocales } from '../helpers/i8n'
-import withTour from '../components/tour/withTour'
+import StatusConnected from './StatusConnected.js'
+import BandwidthStatsDisabled from './BandwidthStatsDisabled.js'
+import IsNotConnected from '../components/is-not-connected/IsNotConnected.js'
+import NodeInfo from './NodeInfo.js'
+import NodeInfoAdvanced from './NodeInfoAdvanced.js'
+import NodeBandwidthChart from './NodeBandwidthChart.js'
+import NetworkTraffic from './NetworkTraffic.js'
+import Box from '../components/box/Box.js'
+import AnalyticsBanner from '../components/analytics-banner/AnalyticsBanner.js'
+import { statusTour } from '../lib/tours.js'
+import { getJoyrideLocales } from '../helpers/i8n.js'
+import withTour from '../components/tour/withTour.js'
 
 const StatusPage = ({
   t,
   ipfsConnected,
-  analyticsAskToEnable,
+  showAnalyticsBanner,
   doEnableAnalytics,
   doDisableAnalytics,
+  doToggleShowAnalyticsBanner,
   toursEnabled,
   handleJoyrideCallback,
   nodeBandwidthEnabled
@@ -34,7 +35,8 @@ const StatusPage = ({
       <Box className='pa3 joyride-status-node' style={{ minHeight: 0 }}>
         <div className='flex'>
           <div className='flex-auto'>
-            { ipfsConnected ? (
+            { ipfsConnected
+              ? (
               <div>
                 <StatusConnected />
                 <NodeInfo />
@@ -42,24 +44,21 @@ const StatusPage = ({
                   <NodeInfoAdvanced />
                 </div>
               </div>
-            ) : (
+                )
+              : (
               <div>
                 <IsNotConnected />
               </div>
-            )}
+                )}
           </div>
         </div>
       </Box>
-      { ipfsConnected && analyticsAskToEnable &&
-        <AskToEnable
+      { ipfsConnected && showAnalyticsBanner &&
+        <AnalyticsBanner
           className='mt3'
-          label={t('AskToEnable.label')}
-          yesLabel={t('app:actions.ok')}
-          noLabel={t('app:actions.noThanks')}
-          detailsLabel={t('app:actions.moreInfo')}
-          detailsLink='#/settings/analytics'
-          onYes={doEnableAnalytics}
-          onNo={doDisableAnalytics} />
+          label={t('AnalyticsBanner.label')}
+          yesLabel={t('app:actions.close')}
+          onYes={() => doToggleShowAnalyticsBanner(false)} />
       }
       <div style={{ opacity: ipfsConnected ? 1 : 0.4 }}>
         { nodeBandwidthEnabled
@@ -92,9 +91,10 @@ const StatusPage = ({
 export default connect(
   'selectIpfsConnected',
   'selectNodeBandwidthEnabled',
-  'selectAnalyticsAskToEnable',
+  'selectShowAnalyticsBanner',
   'selectToursEnabled',
   'doEnableAnalytics',
   'doDisableAnalytics',
+  'doToggleShowAnalyticsBanner',
   withTour(withTranslation('status')(StatusPage))
 )

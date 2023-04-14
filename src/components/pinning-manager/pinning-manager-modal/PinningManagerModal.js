@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'redux-bundler-react'
 import { withTranslation, Trans } from 'react-i18next'
-import PinningServiceModal from '../pinning-manager-service-modal/PinningManagerServiceModal'
+import PinningServiceModal from '../pinning-manager-service-modal/PinningManagerServiceModal.js'
 import './PinningManagerModal.css'
 
 // Components
-import { Modal, ModalBody, ModalActions } from '../../modal/Modal'
-import Button from '../../button/Button'
-import Overlay from '../../overlay/Overlay'
+import { Modal, ModalBody, ModalActions } from '../../modal/Modal.js'
+import Button from '../../button/Button.js'
+import Overlay from '../../overlay/Overlay.js'
 
 const PinningManagerModal = ({ t, tReady, onLeave, className, remoteServiceTemplates, pinningServicesDefaults, ...props }) => {
   const [selectedService, setSelectedService] = useState(false)
@@ -46,7 +46,7 @@ const PinningManagerModal = ({ t, tReady, onLeave, className, remoteServiceTempl
       </ModalActions>
 
       <Overlay show={!!selectedService} onLeave={onModalClose} hidden>
-        <PinningServiceModal className='outline-0' service={selectedService} onSuccess={onSuccess} onLeave={onModalClose} nickname={selectedServiceInfo.nickname} apiEndpoint={selectedServiceInfo.apiEndpoint} visitServiceUrl={selectedServiceInfo.visitServiceUrl} t={t} />
+        <PinningServiceModal className='outline-0' service={selectedService} onSuccess={onSuccess} onLeave={onModalClose} nickname={selectedServiceInfo.nickname} apiEndpoint={selectedServiceInfo.apiEndpoint} visitServiceUrl={selectedServiceInfo.visitServiceUrl} complianceReportUrl={selectedServiceInfo.complianceReportUrl} t={t} />
       </Overlay>
     </Modal>
   )

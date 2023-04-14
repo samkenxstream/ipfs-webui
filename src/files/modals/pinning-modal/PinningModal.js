@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { /* Trans, */ withTranslation } from 'react-i18next'
-import { humanSize } from '../../../lib/files'
-import Button from '../../../components/button/Button'
-import Checkbox from '../../../components/checkbox/Checkbox'
-import GlyphPin from '../../../icons/GlyphPin'
-import { Modal, ModalActions, ModalBody } from '../../../components/modal/Modal'
+import { humanSize } from '../../../lib/files.js'
+import Button from '../../../components/button/Button.js'
+import Checkbox from '../../../components/checkbox/Checkbox.js'
+import GlyphPin from '../../../icons/GlyphPin.js'
+import Icon from '../../../icons/StrokePinCloud.js'
+import { Modal, ModalActions, ModalBody } from '../../../components/modal/Modal.js'
+import { complianceReportsHomepage } from '../../../constants/pinning.js'
 import { connect } from 'redux-bundler-react'
 import './PinningModal.css'
 
@@ -21,8 +23,8 @@ const PinIcon = ({ icon, index }) => {
   return <GlyphPin width={32} height={32} className={glyphClass}/>
 }
 
-export const PinningModal = ({ t, tReady, onCancel, onPinningSet, file, pinningServices, remotePins, notRemotePins, doGetFileSizeThroughCid, doSelectRemotePinsForFile, doFetchPinningServices, doFetchRemotePins, className, ...props }) => {
-  const selectedRemoteServices = useMemo(() => doSelectRemotePinsForFile(file, remotePins, notRemotePins), [doSelectRemotePinsForFile, file, remotePins, notRemotePins])
+export const PinningModal = ({ t, tReady, onCancel, onPinningSet, file, pinningServices, remotePins, notRemotePins, pendingPins, doGetFileSizeThroughCid, doSelectRemotePinsForFile, doFetchPinningServices, doFetchRemotePins, className, ...props }) => {
+  const selectedRemoteServices = useMemo(() => doSelectRemotePinsForFile(file, remotePins, notRemotePins, pendingPins), [doSelectRemotePinsForFile, file, remotePins, notRemotePins, pendingPins])
   const [selectedServices, setSelectedServices] = useState([...selectedRemoteServices, ...[file.pinned && 'local']])
   const [size, setSize] = useState(null)
 
@@ -49,7 +51,7 @@ export const PinningModal = ({ t, tReady, onCancel, onPinningSet, file, pinningS
 
   return (
     <Modal {...props} className={className} onCancel={onCancel} >
-      <ModalBody title={t('pinningModal.title')}>
+      <ModalBody title={t('pinningModal.title')} Icon={Icon}>
         <div className="pinningModalContainer">
           <button className="flex items-center pa1 hoverable-button" key={t('pinningModal.localNode')} onClick={() => selectService('local')}>
             <Checkbox className='pv3 pl3 pr1 flex-none' checked={selectedServices.includes('local')} style={{ pointerEvents: 'none' }}/>
@@ -69,6 +71,7 @@ export const PinningModal = ({ t, tReady, onCancel, onPinningSet, file, pinningS
             Need to add or configure a pinning service? Go to <a href="#/settings" className="link blue">Settings.</a>
           </Trans>
         </p> */}
+        <a className="mb1 tl f7 charcoal-muted no-underline underline-hover" target="_blank" rel="noreferrer" href={complianceReportsHomepage}>{ t('pinningModal.complianceLabel') }</a>
         <p className="f6 charcoal">{t('pinningModal.totalSize', { size: humanSize(size) })}</p>
       </ModalBody>
 
@@ -84,8 +87,7 @@ PinningModal.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onPinningSet: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  file: PropTypes.object,
-  tReady: PropTypes.bool
+  file: PropTypes.object.isRequired
 }
 
 PinningModal.defaultProps = {
@@ -95,6 +97,7 @@ PinningModal.defaultProps = {
 export default connect(
   'selectPinningServices',
   'selectRemotePins',
+  'selectPendingPins',
   'selectNotRemotePins',
   'doSelectRemotePinsForFile',
   'doGetFileSizeThroughCid',

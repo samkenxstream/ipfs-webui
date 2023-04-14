@@ -4,11 +4,11 @@ import { withTranslation } from 'react-i18next'
 import classnames from 'classnames'
 import ipfsLogoTextVert from './ipfs-logo-text-vert.svg'
 import ipfsLogoTextHoriz from './ipfs-logo-text-horiz.svg'
-import StrokeMarketing from '../icons/StrokeMarketing'
-import StrokeWeb from '../icons/StrokeWeb'
-import StrokeCube from '../icons/StrokeCube'
-import StrokeSettings from '../icons/StrokeSettings'
-import StrokeIpld from '../icons/StrokeIpld'
+import StrokeMarketing from '../icons/StrokeMarketing.js'
+import StrokeWeb from '../icons/StrokeWeb.js'
+import StrokeCube from '../icons/StrokeCube.js'
+import StrokeSettings from '../icons/StrokeSettings.js'
+import StrokeIpld from '../icons/StrokeIpld.js'
 
 // Styles
 import './NavBar.css'
@@ -55,8 +55,6 @@ export const NavBar = ({ t }) => {
   const bugsUrl = `${codeUrl}/issues`
   const gitRevision = process.env.REACT_APP_GIT_REV
   const revisionUrl = `${codeUrl}/commit/${gitRevision}`
-  const webUiVersion = process.env.REACT_APP_VERSION
-  const webUiVersionUrl = `${codeUrl}/releases/tag/v${webUiVersion}`
   return (
     <div className='h-100 fixed-l flex flex-column justify-between' style={{ overflowY: 'auto', width: 'inherit' }}>
       <div className='flex flex-column'>
@@ -75,11 +73,8 @@ export const NavBar = ({ t }) => {
         </div>
       </div>
       <div className='dn db-l navbar-footer mb2 tc center f7 o-80 glow'>
-        { webUiVersion && <div className='mb1'>
-          <a className='link white' href={webUiVersionUrl} target='_blank' rel='noopener noreferrer'>{t('app:terms.ui')} v{webUiVersion}</a>
-        </div> }
         { gitRevision && <div className='mb1'>
-          <a className='link white' href={revisionUrl} target='_blank' rel='noopener noreferrer'>{t('app:nav.revision')} {gitRevision}</a>
+          <a className='link white' href={revisionUrl} target='_blank' rel='noopener noreferrer'>{t('app:terms.revision')} {gitRevision}</a>
         </div> }
         <div className='mb1'>
           <a className='link white' href={codeUrl} target='_blank' rel='noopener noreferrer'>{t('app:nav.codeLink')}</a>

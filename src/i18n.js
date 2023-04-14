@@ -4,9 +4,12 @@ import Backend from 'i18next-chained-backend'
 import LocalStorageBackend from 'i18next-localstorage-backend'
 import HttpBackend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
-import { version } from '../package.json'
+import pkgJson from '../package.json'
 
 import locales from './lib/languages.json'
+import getValidLocaleCode from './lib/i18n-localeParser.js'
+
+const { version } = pkgJson
 export const localesList = Object.values(locales)
 
 i18n
@@ -14,6 +17,7 @@ i18n
   .use(Backend)
   .use(LanguageDetector)
   .init({
+    load: 'currentOnly', // see https://github.com/i18next/i18next-http-backend/issues/61
     backend: {
       backends: [
         LocalStorageBackend,
@@ -25,8 +29,11 @@ i18n
           expirationTime: (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 1 : 7 * 24 * 60 * 60 * 1000
         },
         { // HttpBackend
-          // ensure a relative path is used to look up the locales, so it works when loaded from /ipfs/<cid>
-          loadPath: 'locales/{{lng}}/{{ns}}.json'
+          loadPath: (lngs, namespaces) => {
+            const locale = getValidLocaleCode({ i18n, localeCode: lngs[0], languages: locales })
+            // ensure a relative path is used to look up the locales, so it works when loaded from /ipfs/<cid>
+            return `locales/${locale}/${namespaces}.json`
+          }
         }
       ]
     },
@@ -37,6 +44,7 @@ i18n
       'zh-Hans': ['zh-CN', 'en'],
       'zh-Hant': ['zh-TW', 'en'],
       zh: ['zh-CN', 'en'],
+      ko: ['ko-KR', 'en'],
       default: ['en']
     },
     debug: process.env.DEBUG,
