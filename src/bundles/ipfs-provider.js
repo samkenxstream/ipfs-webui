@@ -7,14 +7,6 @@ import * as Enum from './enum.js'
 import { perform } from './task.js'
 import { readSetting, writeSetting } from './local-storage.js'
 
-/* TODO: restore when  no longer bundle standalone ipld with ipld-explorer
- * context: https://github.com/ipfs/ipld-explorer-components/pull/289
-// @ts-ignore
-import ipldGit from 'ipld-git'
-// @ts-ignore
-import ipldEthereum from 'ipld-ethereum'
-*/
-
 /**
  * @typedef {import('ipfs').IPFSService} IPFSService
  * @typedef {import('cids')} CID
@@ -374,7 +366,11 @@ const actions = {
       }
 
       const result = await getIpfs({
-        // @ts-ignore - TS can't seem to infer connectionTest option
+        /**
+         *
+         * @param {import('kubo-rpc-client').IPFSHTTPClient} ipfs
+         * @returns {Promise<boolean>}
+         */
         connectionTest: async (ipfs) => {
           // ipfs connection is working if can we fetch the bw stats.
           // See: https://github.com/ipfs-shipyard/ipfs-webui/issues/835#issuecomment-466966884

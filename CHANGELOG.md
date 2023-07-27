@@ -1,3 +1,147 @@
+## [4.1.0](https://github.com/ipfs/ipfs-webui/compare/v4.0.2...v4.1.0) (2023-07-25)
+
+
+ CID `bafybeieqdeoqkf7xf4aozd524qncgiloh33qgr25lyzrkusbcre4c3fxay`
+
+ --- 
+
+
+
+### Features
+
+* add 4EVERLAND to list of pinning service providers ([#2107](https://github.com/ipfs/ipfs-webui/issues/2107)) ([12a0f87](https://github.com/ipfs/ipfs-webui/commit/12a0f87e0b002096757372c436002958c1791a13))
+
+
+### Bug Fixes
+
+* **ci:** e2e coverage ([#2142](https://github.com/ipfs/ipfs-webui/issues/2142)) ([83353e0](https://github.com/ipfs/ipfs-webui/commit/83353e0d4561c308430fcb20fcebe9e54b5aa4c0))
+* ipld-explorer-components@4.0.2 ([#2141](https://github.com/ipfs/ipfs-webui/issues/2141)) ([670ba7c](https://github.com/ipfs/ipfs-webui/commit/670ba7cd018f2ea68cad005bb19af7eb0c8186b8))
+
+
+### Tests
+
+* only repeat e2e tests on PRs ([#2124](https://github.com/ipfs/ipfs-webui/issues/2124)) ([530c501](https://github.com/ipfs/ipfs-webui/commit/530c5017832218336876df2ad01a0802c3bf8964))
+* **storybook:** add PeerBandwidthTable.stories.js ([#2095](https://github.com/ipfs/ipfs-webui/issues/2095)) ([c969c5e](https://github.com/ipfs/ipfs-webui/commit/c969c5e47c0335a088be1d7f1d19e9914b256b11))
+
+
+### Trivial Changes
+
+* Pull transifex translations ([#2137](https://github.com/ipfs/ipfs-webui/issues/2137)) ([2284453](https://github.com/ipfs/ipfs-webui/commit/2284453959b33a1f74391f3e3cd0a580ca89b264))
+* Pull transifex translations ([#2140](https://github.com/ipfs/ipfs-webui/issues/2140)) ([95d468b](https://github.com/ipfs/ipfs-webui/commit/95d468bcc0c2c24a8f6c48875fa8f68a7601b0e7))
+
+## [4.0.2](https://github.com/ipfs/ipfs-webui/compare/v4.0.1...v4.0.2) (2023-07-03)
+
+
+ CID `bafybeicyp7ssbnj3hdzehcibmapmpuc3atrsc4ch3q6acldfh4ojjdbcxe`
+
+ --- 
+
+
+
+### Bug Fixes
+
+* dont spam IPFS_INIT_FAILED events to countly ([#2133](https://github.com/ipfs/ipfs-webui/issues/2133)) ([b8cf74a](https://github.com/ipfs/ipfs-webui/commit/b8cf74aa30ce38090fc345b091276f18076d9bb2))
+
+
+### Trivial Changes
+
+* **deps:** bump actions/checkout from 3.5.2 to 3.5.3 ([#2128](https://github.com/ipfs/ipfs-webui/issues/2128)) ([de5aaf4](https://github.com/ipfs/ipfs-webui/commit/de5aaf4ad71d5a411c59453e9966c430905ba363))
+* **deps:** bump actions/download-artifact from 2 to 3 ([#2129](https://github.com/ipfs/ipfs-webui/issues/2129)) ([5427709](https://github.com/ipfs/ipfs-webui/commit/5427709730186f700dea32ccc6596f3911fff982))
+* **deps:** bump actions/github-script from 3 to 6 ([#2127](https://github.com/ipfs/ipfs-webui/issues/2127)) ([d31f25c](https://github.com/ipfs/ipfs-webui/commit/d31f25c901c8238424b949373bdfb2b720103618))
+* **deps:** bump actions/upload-artifact from 2 to 3 ([#2126](https://github.com/ipfs/ipfs-webui/issues/2126)) ([4b45b5f](https://github.com/ipfs/ipfs-webui/commit/4b45b5fe32cbf7cea81efe7890cdafa96972b6ae))
+* **deps:** bump gozala/typescript-error-reporter-action ([#2130](https://github.com/ipfs/ipfs-webui/issues/2130)) ([3ea7f59](https://github.com/ipfs/ipfs-webui/commit/3ea7f59980a049cd7526eb4de1f2cb430b7cfa79))
+* **deps:** bump stefanzweifel/git-auto-commit-action ([#2125](https://github.com/ipfs/ipfs-webui/issues/2125)) ([d76d95c](https://github.com/ipfs/ipfs-webui/commit/d76d95cf624ffdac6c0f2f1b11bcb4c975d39ab6))
+* **readme:** remove mentions of js-ipfs ([#2134](https://github.com/ipfs/ipfs-webui/issues/2134)) ([a43dd23](https://github.com/ipfs/ipfs-webui/commit/a43dd233a1ca40078311a34f45993b6a7c38de0a))
+* Update .github/dependabot.yml [skip ci] ([bea5f67](https://github.com/ipfs/ipfs-webui/commit/bea5f6755181eae7117435d7ae30da9cf48fd883))
+* Update .github/workflows/stale.yml [skip ci] ([c5eaecc](https://github.com/ipfs/ipfs-webui/commit/c5eaecc1fd2e6d12fee2aaa9393b96171fc1dc7f))
+* Update .github/workflows/stale.yml [skip ci] ([1fe83ec](https://github.com/ipfs/ipfs-webui/commit/1fe83ecaf23e250f9f8b50be11649a53386895c5))
+
+## [4.0.1](https://github.com/ipfs/ipfs-webui/compare/v4.0.0...v4.0.1) (2023-06-14)
+
+
+ CID `bafybeigs6d53gpgu34553mbi5bbkb26e4ikruoaaar75jpfdywpup2r3my`
+
+ --- 
+
+
+
+### Bug Fixes
+
+* resolve e2e test failures ([#2122](https://github.com/ipfs/ipfs-webui/issues/2122)) ([106627d](https://github.com/ipfs/ipfs-webui/commit/106627d992fb55c75c2461a18341ca3058c77110))
+
+## [4.0.0](https://github.com/ipfs/ipfs-webui/compare/v3.0.0...v4.0.0) (2023-06-12)
+
+
+ CID `bafybeifu32oukwmh5674fbjyvn7nkobfxyrnr4hq5gl46yv7jkvai2ze7q`
+
+ --- 
+
+
+
+### ⚠ BREAKING CHANGES
+
+* This change updates the version of
+ipld-explorer-components we're using. The new ipld-explorer-components
+does not depend on old js-ipfs nor ipld dependencies.
+
+* fix: transient dependency warning
+
+* test: fix peer-locations.test.js
+
+* test: fix src/bundles/peer-bandwidth.test.js
+
+* test: fix test/e2e/explore.test.js
+
+* fix: support async peer info
+
+* test: fix src/bundles/peer-locations.test.js
+
+* fix: don't throw on lack of coverage data
+
+* feat: use ipld-explorer-components@4.0.0
+
+* chore: attempt to remove npm strict engines
+
+### Features
+
+* use ipld-explorer-components@4.0.0 ([#2117](https://github.com/ipfs/ipfs-webui/issues/2117)) ([638e93d](https://github.com/ipfs/ipfs-webui/commit/638e93d8acb363bbf660c9d0fa6b5a62b59ca14d)), closes [#2120](https://github.com/ipfs/ipfs-webui/issues/2120)
+
+## [3.0.0](https://github.com/ipfs/ipfs-webui/compare/v2.22.0...v3.0.0) (2023-04-24)
+
+
+ CID `bafybeic4gops3d3lyrisqku37uio33nvt6fqxvkxihrwlqsuvf76yln4fm`
+
+ --- 
+
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to ESM (#2092)
+
+### Features
+
+* ipfs-http-client -> kubo-rpc-client ([#2098](https://github.com/ipfs/ipfs-webui/issues/2098)) ([5e53c79](https://github.com/ipfs/ipfs-webui/commit/5e53c7929fc671f16e86563032e9071bc589439e)), closes [#issuecomment-1426219633](https://github.com/ipfs/ipfs-webui/issues/issuecomment-1426219633) [/github.com/ipfs/ipfs-webui/issues/2079#issuecomment-1426337490](https://github.com/ipfs//github.com/ipfs/ipfs-webui/issues/2079/issues/issuecomment-1426337490)
+* migrate to ESM ([#2092](https://github.com/ipfs/ipfs-webui/issues/2092)) ([58a737c](https://github.com/ipfs/ipfs-webui/commit/58a737cb402c84f137c2b8659573867fea6b76f4))
+
+
+### Bug Fixes
+
+* e2e/explore.test.js succeeds in offline mode ([#2109](https://github.com/ipfs/ipfs-webui/issues/2109)) ([a5e9ac6](https://github.com/ipfs/ipfs-webui/commit/a5e9ac6e378d6c0093c0403f34fee2843c9bea26))
+* ko language falls back to ko-KR ([#2102](https://github.com/ipfs/ipfs-webui/issues/2102)) ([3369800](https://github.com/ipfs/ipfs-webui/commit/3369800b395236f5d37555582b64b92188f36df6))
+* semantic release custom notes import ([#2113](https://github.com/ipfs/ipfs-webui/issues/2113)) ([2f9f306](https://github.com/ipfs/ipfs-webui/commit/2f9f306dea5259b147a73ed4f428223d6d7f75ed))
+
+
+### Trivial Changes
+
+* add NetworkTraffic.stories.js ([#2094](https://github.com/ipfs/ipfs-webui/issues/2094)) ([7a3bf46](https://github.com/ipfs/ipfs-webui/commit/7a3bf46268b47c6e1f55541a7561276f11c2be66))
+* pull new translations ([#2101](https://github.com/ipfs/ipfs-webui/issues/2101)) ([cbabac3](https://github.com/ipfs/ipfs-webui/commit/cbabac3ae7f5f2b535f3908361c6cbf9b076d10b))
+* pull new translations ([#2104](https://github.com/ipfs/ipfs-webui/issues/2104)) ([4a691a2](https://github.com/ipfs/ipfs-webui/commit/4a691a2c5abca7d21ad2fa5af27ba941d9105dfb))
+* Pull transifex translations ([#2088](https://github.com/ipfs/ipfs-webui/issues/2088)) ([a5b8a1c](https://github.com/ipfs/ipfs-webui/commit/a5b8a1ccd30b75a623643592e23df38b6b08e977))
+* Pull transifex translations ([#2091](https://github.com/ipfs/ipfs-webui/issues/2091)) ([d209863](https://github.com/ipfs/ipfs-webui/commit/d209863110040259ce4b0865dad4123a8da4596f))
+* Pull transifex translations ([#2099](https://github.com/ipfs/ipfs-webui/issues/2099)) ([1cf2fe7](https://github.com/ipfs/ipfs-webui/commit/1cf2fe706d1f9ff7916d979748c0791627f1fe91))
+* Pull transifex translations ([#2111](https://github.com/ipfs/ipfs-webui/issues/2111)) ([57d9b63](https://github.com/ipfs/ipfs-webui/commit/57d9b63a5000aa7e0c9c8d2c44f51969abf3fbae))
+
 ## [2.22.0](https://github.com/ipfs/ipfs-webui/compare/v2.21.0...v2.22.0) (2023-01-27)
 
 
